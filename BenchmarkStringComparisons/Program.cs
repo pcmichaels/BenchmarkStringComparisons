@@ -11,5 +11,7 @@ namespace BenchmarkStringComparisons
         static void Main(string[] args)
         {
         }
+
+
     }
 }
