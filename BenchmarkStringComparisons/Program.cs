@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BenchmarkDotNet.Running;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace BenchmarkStringComparisons
     {
         static void Main(string[] args)
         {
+            BenchmarkRunner.Run<StringCompareCaseSensitive>();
+            BenchmarkRunner.Run<StringCompareCaseInsensitive>();
         }
 
 

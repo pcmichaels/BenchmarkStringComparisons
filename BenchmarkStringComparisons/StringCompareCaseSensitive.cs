@@ -8,41 +8,65 @@ using System.Threading.Tasks;
 namespace BenchmarkStringComparisons
 {
     public class StringCompareCaseSensitive
-    {
-        [Benchmark]
-        public bool StandardEquality(string string1, string string2)
+    {        
+        [Params("test1", "test2", "I am an aardvark")]
+        public string _string1;
+
+        [Params("test1", "test2", "I am an aardvark")]
+        public string _string2;
+
+        [Benchmark]        
+        public bool StandardEquality()
         {
-            return string1 == string2;
+            return _string1 == _string2;
         }
 
         [Benchmark]
-        public bool StandardEquals(string string1, string string2)
+        public bool StandardEquals()
         {
-            return string1.Equals(string2);
+            return _string1.Equals(_string2);
         }
 
         [Benchmark]
-        public bool StandardCompare(string string1, string string2)
+        public bool StandardEqualsCulture()
         {
-            return (string.Compare(string1, string2) == 0);
+            return _string1.Equals(_string2, StringComparison.CurrentCulture);
         }
 
         [Benchmark]
-        public bool StandardCompareOrdinal(string string1, string string2)
+        public bool StandardEqualsInvariantCulture()
         {
-            return (string.CompareOrdinal(string1, string2) == 0);
+            return _string1.Equals(_string2, StringComparison.InvariantCulture);
         }
 
         [Benchmark]
-        public bool StandardCompareTo(string string1, string string2)
+        public bool StandardEqualsOrdinal()
         {
-            return (string1.CompareTo(string2) == 0);
+            return _string1.Equals(_string2, StringComparison.Ordinal);
         }
 
         [Benchmark]
-        public bool StandardIndexOf(string string1, string string2)
+        public bool StandardCompare()
         {
-            return (string1.IndexOf(string2) != -1);
+            return (string.Compare(_string1, _string2) == 0);
+        }
+
+        [Benchmark]
+        public bool StandardCompareOrdinal()
+        {
+            return (string.CompareOrdinal(_string1, _string2) == 0);
+        }
+
+        [Benchmark]
+        public bool StandardCompareTo()
+        {
+            return (_string1.CompareTo(_string2) == 0);
+        }
+
+        [Benchmark]
+        public bool StandardIndexOf()
+        {
+            return (_string1.IndexOf(_string2) != -1);
         }
 
     }
